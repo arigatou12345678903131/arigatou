@@ -1,0 +1,1611 @@
+/* ==========================================================================
+   ありがとう教 公式ウェブサイト スタイルシート (style.css)
+   神聖さと温もり、現代的なUIを融合したデザイン
+   ========================================================================== */
+
+:root {
+  /* カラーパレット */
+  --primary-color: #ff5e7e;
+  --primary-light: #ffa6b8;
+  --primary-soft: #fff0f3;
+  --primary-dark: #d93d5f;
+  
+  --secondary-color: #ff9f43;
+  --secondary-light: #ffd8a8;
+  --secondary-soft: #fff9db;
+
+  --accent-gold: #f59e0b;
+  --accent-gold-light: #fde68a;
+  
+  --sacred-blue: #1e3a8a;
+  --sacred-blue-light: #3b82f6;
+  --sacred-navy: #0f172a;
+
+  --bg-gradient-start: #fffaf5;
+  --bg-gradient-mid: #fff5f7;
+  --bg-gradient-end: #f5f8ff;
+  
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --card-border: rgba(255, 214, 226, 0.6);
+  --card-shadow: 0 12px 35px -8px rgba(255, 107, 139, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+  
+  --text-main: #2d3748;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+
+  --font-family-base: 'Zen Maru Gothic', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-serif: 'Shippori Mincho', 'Noto Serif JP', serif;
+  
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  
+  --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ダークモード（星空感謝モード） */
+body.dark-mode {
+  --primary-color: #ff7597;
+  --primary-light: #ffb8c7;
+  --primary-soft: rgba(255, 117, 151, 0.15);
+  --primary-dark: #ff3366;
+
+  --secondary-color: #fbbf24;
+  --secondary-light: #fde68a;
+  --secondary-soft: rgba(251, 191, 36, 0.15);
+
+  --sacred-blue: #60a5fa;
+  --sacred-blue-light: #93c5fd;
+
+  --bg-gradient-start: #0b0f19;
+  --bg-gradient-mid: #14162b;
+  --bg-gradient-end: #0f172a;
+
+  --card-bg: rgba(26, 32, 54, 0.85);
+  --card-border: rgba(255, 117, 151, 0.25);
+  --card-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 117, 151, 0.15);
+
+  --text-main: #f1f5f9;
+  --text-muted: #cbd5e1;
+  --text-light: #64748b;
+}
+
+/* リセット & 基本設定 */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  line-height: 1.75;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* 背景エフェクトCanvas */
+#sakura-canvas, #firework-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99;
+}
+
+#firework-canvas {
+  z-index: 100;
+}
+
+/* 共通コンテナ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ==========================================================================
+   ヘッダー & ナビゲーション
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  transition: var(--transition-smooth);
+}
+
+body.dark-mode .site-header {
+  background: rgba(15, 23, 42, 0.88);
+}
+
+.site-header.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.brand-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(255, 94, 126, 0.3);
+  transition: transform 0.4s ease;
+}
+
+.brand-link:hover .brand-logo {
+  transform: rotate(15deg) scale(1.08);
+}
+
+.brand-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--sacred-blue) 0%, var(--primary-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.05em;
+}
+
+.brand-sub {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+/* ナビゲーションメニュー */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 1.1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+  background: var(--primary-soft);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.theme-toggle-btn, .audio-toggle-btn {
+  background: var(--primary-soft);
+  border: 1px solid var(--card-border);
+  color: var(--primary-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.15rem;
+  transition: var(--transition-bounce);
+}
+
+.theme-toggle-btn:hover, .audio-toggle-btn:hover {
+  transform: scale(1.1);
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.nav-pray-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 94, 126, 0.35);
+  transition: var(--transition-bounce);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-pray-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(255, 94, 126, 0.5);
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   ヒーローセクション
+   ========================================================================== */
+.hero-section {
+  padding-top: 130px;
+  padding-bottom: 70px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--primary-light);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  box-shadow: 0 2px 10px rgba(255, 94, 126, 0.15);
+  margin-bottom: 1.5rem;
+  animation: floatBadge 3s ease-in-out infinite alternate;
+}
+
+body.dark-mode .hero-badge {
+  background: rgba(26, 32, 54, 0.85);
+}
+
+@keyframes floatBadge {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+.hero-title {
+  font-family: var(--font-family-serif);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-title .gradient-text {
+  background: linear-gradient(135deg, var(--sacred-blue) 0%, var(--primary-color) 60%, var(--secondary-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-desc {
+  font-size: 1.12rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 14px 30px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(255, 94, 126, 0.4);
+  transition: var(--transition-bounce);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(255, 94, 126, 0.55);
+}
+
+.btn-secondary {
+  background: var(--card-bg);
+  color: var(--text-main);
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-soft);
+  color: var(--primary-color);
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-num {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  font-family: var(--font-family-serif);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ヒーロー画像エリア */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visual-halo {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(255, 166, 184, 0.45) 0%, rgba(255, 216, 168, 0.3) 45%, transparent 70%);
+  border-radius: 50%;
+  animation: pulseHalo 4s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+@keyframes pulseHalo {
+  0% { transform: scale(0.92); opacity: 0.7; }
+  100% { transform: scale(1.12); opacity: 1; }
+}
+
+.mascot-card {
+  position: relative;
+  z-index: 2;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: 0 20px 45px -10px rgba(255, 94, 126, 0.25);
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.mascot-card:hover {
+  transform: translateY(-6px);
+}
+
+.mascot-img-wrapper {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--card-border);
+}
+
+.mascot-img {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  transition: transform 0.6s ease;
+}
+
+.mascot-card:hover .mascot-img {
+  transform: scale(1.03);
+}
+
+.mascot-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  border: 1px solid var(--primary-light);
+}
+
+body.dark-mode .mascot-badge {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.floating-blessing {
+  position: absolute;
+  top: -15px;
+  right: -20px;
+  background: #fff;
+  border: 2px solid var(--primary-color);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  box-shadow: 0 8px 20px rgba(255, 94, 126, 0.25);
+  z-index: 3;
+  animation: bounceBlessing 2.5s ease-in-out infinite;
+}
+
+body.dark-mode .floating-blessing {
+  background: #1e293b;
+  color: #ff9fb2;
+}
+
+@keyframes bounceBlessing {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ==========================================================================
+   セクション共通ヘッダー
+   ========================================================================== */
+.section {
+  padding: 90px 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.section-badge {
+  display: inline-block;
+  padding: 4px 16px;
+  background: var(--primary-soft);
+  color: var(--primary-color);
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  border: 1px solid var(--card-border);
+}
+
+.section-title {
+  font-family: var(--font-family-serif);
+  font-size: clamp(2rem, 3.5vw, 2.7rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   教義・理念セクション (Doctrine)
+   ========================================================================== */
+.doctrine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.doctrine-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.doctrine-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.doctrine-card:hover {
+  transform: translateY(-8px);
+}
+
+.doctrine-card:hover::before {
+  opacity: 1;
+}
+
+.doctrine-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background: var(--primary-soft);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.doctrine-card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.doctrine-card-text {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
+/* 聖句バナー */
+.doctrine-quote-box {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 240, 243, 0.8));
+  border: 2px dashed var(--primary-light);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 3rem;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--card-shadow);
+}
+
+body.dark-mode .doctrine-quote-box {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(26, 32, 54, 0.8));
+}
+
+.quote-mark {
+  font-size: 3rem;
+  color: var(--primary-light);
+  line-height: 1;
+}
+
+.quote-text {
+  font-family: var(--font-family-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0.5rem 0 1rem 0;
+  color: var(--sacred-navy);
+}
+
+body.dark-mode .quote-text {
+  color: #f8fafc;
+}
+
+.quote-author {
+  font-size: 0.95rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   歴史・創世記セクション (History)
+   ========================================================================== */
+.history-section {
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 230, 236, 0.3) 50%, transparent 100%);
+}
+
+.history-timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.history-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: linear-gradient(180deg, var(--primary-light), var(--accent-gold), var(--sacred-blue-light));
+  transform: translateX(-50%);
+  border-radius: var(--radius-full);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3.5rem;
+  width: 50%;
+  padding: 0 2.5rem;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 15px;
+  width: 22px;
+  height: 22px;
+  background: var(--primary-color);
+  border: 4px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--primary-light);
+  z-index: 5;
+}
+
+.timeline-item:nth-child(odd) .timeline-dot {
+  right: -11px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+  left: -11px;
+}
+
+.timeline-content {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 1.8rem;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-smooth);
+}
+
+.timeline-content:hover {
+  transform: translateY(-4px);
+}
+
+.timeline-date {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 0.75rem;
+}
+
+.timeline-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.timeline-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.genesis-highlight {
+  background: var(--primary-soft);
+  border-left: 4px solid var(--primary-color);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+/* ==========================================================================
+   聖なる記録映像セクション (Archive Video)
+   ========================================================================== */
+.archive-video-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.archive-video {
+  width: 100%;
+  max-height: 540px;
+  display: block;
+  object-fit: contain;
+}
+
+.video-meta {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 0.5rem;
+}
+
+.video-info-text {
+  text-align: left;
+}
+
+.video-info-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.video-info-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.video-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-small {
+  padding: 8px 18px;
+  font-size: 0.88rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition-smooth);
+}
+
+/* ==========================================================================
+   聖歌・讃歌「ありがとうの調べ」 (Hymn Synth Player)
+   ========================================================================== */
+.hymn-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--card-shadow);
+}
+
+.hymn-player-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hymn-info h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.hymn-info p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.hymn-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-play-hymn {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 94, 126, 0.4);
+  transition: var(--transition-bounce);
+}
+
+.btn-play-hymn:hover {
+  transform: scale(1.1);
+}
+
+.hymn-setting-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.hymn-select {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* リアルタイム歌詞ディスプレイ */
+.hymn-lyrics-display {
+  background: var(--primary-soft);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.lyric-syllable {
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-main);
+  transition: var(--transition-bounce);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .lyric-syllable {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.lyric-syllable.active {
+  background: var(--primary-color);
+  color: #fff;
+  transform: scale(1.25) translateY(-4px);
+  box-shadow: 0 8px 20px rgba(255, 94, 126, 0.4);
+}
+
+/* インタラクティブ鍵盤 (Keyboard) */
+.hymn-keyboard-title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+}
+
+.interactive-keyboard {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.piano-key {
+  background: #ffffff;
+  border: 2px solid var(--card-border);
+  border-bottom: 5px solid #d1d5db;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  width: 70px;
+  height: 140px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 12px;
+  transition: all 0.1s ease;
+  user-select: none;
+}
+
+body.dark-mode .piano-key {
+  background: #1e293b;
+  border-color: #334155;
+  border-bottom-color: #0f172a;
+}
+
+.piano-key:active, .piano-key.pressed {
+  transform: translateY(4px);
+  border-bottom-width: 1px;
+  background: var(--primary-soft);
+  border-color: var(--primary-color);
+}
+
+.key-char {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.key-note {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* ==========================================================================
+   世界の「ありがとう」大典 (Global Arigato Atlas)
+   ========================================================================== */
+.atlas-controls {
+  max-width: 800px;
+  margin: 0 auto 2.5rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-box-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 20px 14px 50px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  font-size: 1rem;
+  font-family: inherit;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-smooth);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(255, 94, 126, 0.15);
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+.region-filter-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-tab {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.filter-tab:hover, .filter-tab.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.atlas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.atlas-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.atlas-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-light);
+}
+
+.atlas-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.atlas-lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.atlas-flag {
+  font-size: 1.5rem;
+}
+
+.btn-speak {
+  background: var(--primary-soft);
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--primary-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-bounce);
+}
+
+.btn-speak:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: scale(1.15);
+}
+
+.atlas-phrase {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--sacred-blue);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+body.dark-mode .atlas-phrase {
+  color: var(--primary-light);
+}
+
+.atlas-reading {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.atlas-random-box {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+/* ==========================================================================
+   インタラクティブ祈祷所 (Sanctuary: Counter, Omikuji, Certificate)
+   ========================================================================== */
+.sanctuary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+
+/* ありがとうカウンター */
+.counter-box {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.counter-value-display {
+  font-size: 3.5rem;
+  font-weight: 900;
+  font-family: var(--font-family-serif);
+  color: var(--primary-color);
+  margin: 1rem 0;
+  line-height: 1;
+}
+
+.counter-label {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.btn-pray-big {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border: 4px solid #fff;
+  color: white;
+  box-shadow: 0 10px 30px rgba(255, 94, 126, 0.45);
+  font-size: 1.4rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 1.5rem auto 1rem auto;
+  transition: var(--transition-bounce);
+  user-select: none;
+}
+
+.btn-pray-big:active {
+  transform: scale(0.92);
+}
+
+.btn-pray-big:hover {
+  transform: scale(1.05);
+  box-shadow: 0 14px 40px rgba(255, 94, 126, 0.6);
+}
+
+.fever-meter-wrapper {
+  width: 100%;
+  max-width: 280px;
+  margin-top: 1rem;
+}
+
+.fever-bar {
+  width: 100%;
+  height: 10px;
+  background: var(--primary-soft);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+.fever-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  transition: width 0.2s ease;
+}
+
+.fever-label {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+/* おみくじ */
+.omikuji-box {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+}
+
+.omikuji-display {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: var(--primary-soft);
+  border: 1px dashed var(--primary-light);
+  border-radius: var(--radius-md);
+  transition: var(--transition-smooth);
+}
+
+.omikuji-result-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.omikuji-result-text {
+  font-size: 1rem;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   信徒証ジェネレーター (Certificate Generator)
+   ========================================================================== */
+.certificate-section {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+}
+
+.cert-form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.cert-input {
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  font-size: 1rem;
+  min-width: 260px;
+  font-family: inherit;
+}
+
+.cert-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.canvas-preview-wrapper {
+  max-width: 600px;
+  margin: 0 auto 1.5rem auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  background: #fff;
+}
+
+#cert-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   FAQ セクション
+   ========================================================================== */
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-smooth);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.faq-icon {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  padding: 0 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 250px;
+  padding-bottom: 1.25rem;
+}
+
+/* ==========================================================================
+   フッター
+   ========================================================================== */
+.site-footer {
+  background: var(--sacred-navy);
+  color: #f1f5f9;
+  padding: 70px 0 30px 0;
+  margin-top: 80px;
+  position: relative;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.footer-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.footer-desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.7;
+}
+
+.footer-links-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #fff;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.footer-links a:hover {
+  color: var(--primary-light);
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+/* 浮遊する感謝文字アニメーション用クラス */
+.floating-word {
+  position: fixed;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--primary-color);
+  pointer-events: none;
+  z-index: 9999;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8);
+  animation: floatUpWord 1.2s ease-out forwards;
+}
+
+@keyframes floatUpWord {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-40px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-90px) scale(1);
+  }
+}
+
+/* ==========================================================================
+   レスポンシブ対応
+   ========================================================================== */
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-badge {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-cta-group {
+    justify-content: center;
+  }
+  .hero-stats {
+    justify-content: center;
+  }
+  .doctrine-grid {
+    grid-template-columns: 1fr;
+  }
+  .sanctuary-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .history-timeline::before {
+    left: 20px;
+  }
+  .timeline-item {
+    width: 100%;
+    padding-left: 55px;
+    padding-right: 0;
+    text-align: left !important;
+  }
+  .timeline-item:nth-child(even) {
+    left: 0;
+  }
+  .timeline-dot {
+    left: 9px !important;
+    right: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-150%);
+    transition: transform 0.4s ease;
+  }
+  .nav-menu.open {
+    transform: translateY(0);
+  }
+  .mobile-menu-toggle {
+    display: block;
+  }
+  .nav-pray-btn {
+    display: none;
+  }
+  .interactive-keyboard {
+    gap: 6px;
+  }
+  .piano-key {
+    width: 50px;
+    height: 110px;
+  }
+}

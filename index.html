@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ありがとう教 公式ウェブサイト | 感謝が世界をあたたかくする</title>
+  <meta name="description" content="すべてに、心からのありがとうを。私立聖学院の講堂で始まった奇跡の言霊。ありがとう教の公式ウェブサイトです。教義、歴史、聖歌、世界のありがとう40言語、信徒証発行。">
+  
+  <!-- ファビコン (SVG Data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+  
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@500;700;800&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- スタイルシート -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 背景エフェクトCanvas (桜吹雪 & 花火演出) -->
+  <canvas id="sakura-canvas"></canvas>
+  <canvas id="firework-canvas"></canvas>
+
+  <!-- ==========================================================================
+       ヘッダー (Header)
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand-link">
+        <img src="logo.jpg" alt="ありがとう教 公式ロゴ" class="brand-logo" onerror="this.src='Gemini_Generated_Image_i8js5ui8js5ui8js.jpg'">
+        <div>
+          <span class="brand-title">ありがとう教</span>
+          <span class="brand-sub">ARIGATO KYO OFFICIAL</span>
+        </div>
+      </a>
+
+      <!-- ナビゲーション -->
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#doctrine" class="nav-link">教義と理念</a></li>
+          <li><a href="#history" class="nav-link">起源と歴史</a></li>
+          <li><a href="#archive" class="nav-link">聖なる記録</a></li>
+          <li><a href="#hymn" class="nav-link">聖歌「ありがとう」</a></li>
+          <li><a href="#languages" class="nav-link">世界のありがとう</a></li>
+          <li><a href="#sanctuary" class="nav-link">感謝の祈り</a></li>
+          <li><a href="#certificate" class="nav-link">信徒証発行</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <!-- ヘッダーアクションボタン -->
+      <div class="header-actions">
+        <button id="audio-toggle-btn" class="audio-toggle-btn" title="聖歌BGMを再生/停止" aria-label="BGM再生切替">🎵</button>
+        <button id="theme-toggle-btn" class="theme-toggle-btn" title="星空ダークモード切替" aria-label="テーマ切替">🌙</button>
+        <button id="nav-pray-btn" class="nav-pray-btn">
+          <span>🙏</span> ありがとう！
+        </button>
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="メニューを開く">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         ヒーローセクション (Hero Section)
+         ========================================================================== -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span>🌸</span> 感謝が世界を満たす、愛と平和の教え
+          </div>
+          <h1 class="hero-title">
+            すべてに、心からの<br>
+            <span class="gradient-text">「ありがとう」</span>を。
+          </h1>
+          <p class="hero-desc">
+            言葉ひとつで心は満ち、世界は優しく変わっていく。<br>
+            私立聖学院中学校・高等学校の講堂で初代教皇の魂の咆哮から誕生した言霊の光。<br>
+            国境も宗派も超えて、あなたへあたたかな祝福をお届けします。
+          </p>
+          <div class="hero-cta-group">
+            <a href="#sanctuary" class="btn-primary">
+              <span>🙏</span> 今すぐ感謝を捧げる
+            </a>
+            <a href="#doctrine" class="btn-secondary">
+              <span>📖</span> 教義と歴史を紐解く
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num" id="hero-stat-words">40+</span>
+              <span class="stat-label">世界各国のありがとう</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">2024.11.02</span>
+              <span class="stat-label">聖学院講堂 創世の刻</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">0 円</span>
+              <span class="stat-label">入信費用・心ひとつで信徒</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- マスコットビジュアル -->
+        <div class="hero-visual">
+          <div class="visual-halo"></div>
+          <div class="floating-blessing">
+            <span>💖 今日も生きていてくれてありがとう！</span>
+          </div>
+          <div class="mascot-card">
+            <div class="mascot-img-wrapper">
+              <img src="mascot.jpg" alt="ありがとう教 公式マスコット・聖女" class="mascot-img" onerror="this.src='Gemini_Generated_Image_tmziawtmziawtmzi.jpg'">
+              <div class="mascot-badge">公式マスコットキャラクター</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         教義・理念セクション (Doctrine Section)
+         ========================================================================== -->
+    <section class="section" id="doctrine">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Doctrine & Principles</span>
+          <h2 class="section-title">ありがとう教の教え</h2>
+          <p class="section-subtitle">
+            「ありがとう」の語源は「有り難し（めったにないこと、奇跡）」。<br>
+            あたりまえの日常などひとつもないことに気づいた瞬間、人生は輝き始めます。
+          </p>
+        </div>
+
+        <div class="doctrine-grid">
+          <!-- 原則 1 -->
+          <div class="doctrine-card">
+            <div class="doctrine-icon">🌱</div>
+            <h3 class="doctrine-card-title">第一条：自己への感謝</h3>
+            <p class="doctrine-card-text">
+              今日も呼吸を続け、命を脈打たせてくれているあなた自身の身体と心に感謝を捧げましょう。自分を愛し労わる心が、他者へのあたたかい光の源泉となります。
+            </p>
+          </div>
+
+          <!-- 原則 2 -->
+          <div class="doctrine-card">
+            <div class="doctrine-icon">🤝</div>
+            <h3 class="doctrine-card-title">第二条：他者への感謝</h3>
+            <p class="doctrine-card-text">
+              家族、友人、そして街ですれ違う人や社会を支えてくれる誰かへ。「ありがとう」と言葉に出して伝えることで、孤立を癒し、人と人のあたたかな繋がりを紡ぎます。
+            </p>
+          </div>
+
+          <!-- 原則 3 -->
+          <div class="doctrine-card">
+            <div class="doctrine-icon">🌍</div>
+            <h3 class="doctrine-card-title">第三条：万物への感謝</h3>
+            <p class="doctrine-card-text">
+              太陽の温もり、一杯の水、手元のスマートフォン、歩く道。私たちを取り囲む万象すべてに「ありがとう」の祈りを捧げる時、世界は祝福に満ちた聖域となります。
+            </p>
+          </div>
+        </div>
+
+        <!-- 聖句引用ブロック -->
+        <div class="doctrine-quote-box">
+          <div class="quote-mark">“</div>
+          <p class="quote-text">
+            「ありがとう」と叫んだその時、世界は敵ではなくなった。<br>
+            すべての存在が、私を生かしてくれる恩人となったのだ。
+          </p>
+          <div class="quote-author">― ありがとう教 初代教皇 講堂での言霊より</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         歴史・起源セクション (History Section)
+         ========================================================================== -->
+    <section class="section history-section" id="history">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Genesis & History</span>
+          <h2 class="section-title">ありがとう教の誕生と歴史</h2>
+          <p class="section-subtitle">
+            ひとつの講堂で生まれた真実の叫びが、今、時空を超えて広がる。
+          </p>
+        </div>
+
+        <div class="history-timeline">
+          <!-- イベント 1: 創世の瞬間 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2024年11月02日 16:00頃</span>
+              <h3 class="timeline-title">創世の刻：聖学院講堂の奇跡</h3>
+              <p class="timeline-desc">
+                私立聖学院中学校・高等学校の講堂にて、初代教皇が心の奥底から沸き立つ感動とともに「ありがとう」と高らかに叫ぶ。
+              </p>
+              <div class="genesis-highlight">
+                📜 公式聖典記録：<br>
+                「私立聖学院中学高等学校の講堂で初代教皇が西暦2024年11月02日16時頃ありがとうと叫んで生まれた。」
+              </div>
+            </div>
+          </div>
+
+          <!-- イベント 2: 言霊の体系化 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2024年〜2025年</span>
+              <h3 class="timeline-title">聖歌の降臨と世界言語の収集</h3>
+              <p class="timeline-desc">
+                重音テトによる神聖な旋律『ありがとうの調べ』が作曲され（テンポ120）、地球上に存在する40以上の言語で「ありがとう」の言葉と発音が集積・編纂される。
+              </p>
+            </div>
+          </div>
+
+          <!-- イベント 3: 現代の布教とデジタル顕現 -->
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2026年09月06日</span>
+              <h3 class="timeline-title">公式アーカイブ記録 & Webサイト降臨</h3>
+              <p class="timeline-desc">
+                教皇の歩みと聖なる記録映像がデジタル保存され、世界中の誰もが「ありがとう」を唱え合える公式ウェブプラットフォームが開かれた。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         聖なる記録映像セクション (Sacred Video Archive)
+         ========================================================================== -->
+    <section class="section" id="archive">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Sacred Archive</span>
+          <h2 class="section-title">聖なる公式記録映像</h2>
+          <p class="section-subtitle">
+            ありがとう教にまつわる貴重なデジタル記録資料をここに公開いたします。
+          </p>
+        </div>
+
+        <div class="archive-video-wrapper">
+          <div class="video-container">
+            <video class="archive-video" controls preload="metadata" playsinline poster="mascot.jpg">
+              <source src="sacred_record.mov" type="video/quicktime">
+              <source src="ScreenRecording_09-06-2026 18-14-49_1.mov" type="video/quicktime">
+              お使いのブラウザは動画の直接再生に対応していません。下記のリンクよりダウンロードしてご鑑賞ください。
+            </video>
+          </div>
+          <div class="video-meta">
+            <div class="video-info-text">
+              <div class="video-info-title">📹 公式アーカイブ：2026年9月6日の記録</div>
+              <div class="video-info-desc">初代教皇の歩みと感謝の息吹が記録された歴史的ムービーアーカイブ</div>
+            </div>
+            <div class="video-actions">
+              <a href="sacred_record.mov" download class="btn-primary btn-small">
+                <span>⬇️</span> 映像を保存する
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         聖歌・讃歌「ありがとうの調べ」 (Hymn Synth Player)
+         ========================================================================== -->
+    <section class="section" id="hymn">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Holy Hymn</span>
+          <h2 class="section-title">聖歌「ありがとうの調べ」</h2>
+          <p class="section-subtitle">
+            『ありがとう.ust』の原典スコア（テンポ120）をWeb Audioシンセサイザーで忠実に演奏。<br>
+            心洗われる「あ・り・が・と・う」のメロディをお聴きください。
+          </p>
+        </div>
+
+        <div class="hymn-card">
+          <div class="hymn-player-header">
+            <div class="hymn-info">
+              <h3>🎵 ありがとう讃歌 (UST Version 1.2 原典)</h3>
+              <p>テンポ: 120 BPM | 音声: 重音テト仕様メロディ</p>
+            </div>
+            <div class="hymn-controls">
+              <div class="hymn-setting-item">
+                <label for="hymn-instrument">音色:</label>
+                <select id="hymn-instrument" class="hymn-select">
+                  <option value="bell">天上のベル (Bell)</option>
+                  <option value="organ">聖なるオルガン (Organ)</option>
+                  <option value="synth">テト風シンセ (Synth Lead)</option>
+                </select>
+              </div>
+              <button id="btn-play-hymn" class="btn-play-hymn" title="聖歌を再生/一時停止">▶</button>
+            </div>
+          </div>
+
+          <!-- 歌詞ディスプレイ -->
+          <div class="hymn-lyrics-display" id="lyrics-display">
+            <span class="lyric-syllable">あ</span>
+            <span class="lyric-syllable">り</span>
+            <span class="lyric-syllable">が</span>
+            <span class="lyric-syllable">と</span>
+            <span class="lyric-syllable">う</span>
+          </div>
+
+          <!-- インタラクティブ鍵盤 -->
+          <div class="hymn-keyboard-title">🎹 自分で「あ・り・が・と・う」を奏でてみよう（キーボード 1〜5 / A〜G 対応）</div>
+          <div class="interactive-keyboard">
+            <div class="piano-key" id="key-c3">
+              <span class="key-char">あ</span>
+              <span class="key-note">C3 [1]</span>
+            </div>
+            <div class="piano-key" id="key-d3">
+              <span class="key-char">り</span>
+              <span class="key-note">D3 [2]</span>
+            </div>
+            <div class="piano-key" id="key-e3">
+              <span class="key-char">が</span>
+              <span class="key-note">E3 [3]</span>
+            </div>
+            <div class="piano-key" id="key-f3">
+              <span class="key-char">と</span>
+              <span class="key-note">F3 [4]</span>
+            </div>
+            <div class="piano-key" id="key-c4">
+              <span class="key-char">う</span>
+              <span class="key-note">C4 [5]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         世界の「ありがとう」大典 (Global Arigato Atlas)
+         ========================================================================== -->
+    <section class="section" id="languages">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Global Gratitude</span>
+          <h2 class="section-title">世界の「ありがとう」大典</h2>
+          <p class="section-subtitle">
+            地球上の40言語による「ありがとう」の言葉と読み方。<br>
+            音声ボタン（🔊）を押すと、ブラウザがその国の発音で読み上げてくれます。
+          </p>
+        </div>
+
+        <!-- 検索・フィルター -->
+        <div class="atlas-controls">
+          <div class="search-box-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="atlas-search" class="search-input" placeholder="言語名や読み方で検索（例: サンキュー, 英語, Merci, スパシーバ）...">
+          </div>
+          <div class="region-filter-tabs">
+            <button class="filter-tab active" data-region="all">🌍 すべて (40)</button>
+            <button class="filter-tab" data-region="asia">🌏 アジア</button>
+            <button class="filter-tab" data-region="europe">🏰 ヨーロッパ</button>
+            <button class="filter-tab" data-region="mideast">🕌 中東・アフリカ</button>
+            <button class="filter-tab" data-region="america">🗽 南北アメリカ</button>
+          </div>
+        </div>
+
+        <!-- 言語カードグリッド -->
+        <div class="atlas-grid" id="atlas-grid">
+          <!-- JavaScriptによって40言語が動的レンダリングされます -->
+        </div>
+
+        <div class="atlas-random-box">
+          <button id="btn-random-arigato" class="btn-primary">
+            <span>🎲</span> 今日の「世界のありがとう」神託を引く
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         インタラクティブ祈祷所 (Sanctuary: Counter & Omikuji)
+         ========================================================================== -->
+    <section class="section" id="sanctuary">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Interactive Sanctuary</span>
+          <h2 class="section-title">感謝の祈祷所</h2>
+          <p class="section-subtitle">
+            心の中で「ありがとう」を想い、ボタンを押してください。<br>
+            連打すると感謝フィーバーモードが発動します！
+          </p>
+        </div>
+
+        <div class="sanctuary-grid">
+          <!-- ありがとうカウンター -->
+          <div class="counter-box">
+            <span class="counter-label">あなたの通算奉納回数</span>
+            <div class="counter-value-display" id="pray-counter-val">108</div>
+            
+            <button id="btn-pray-big" class="btn-pray-big" aria-label="ありがとうボタン">
+              <span>🙏</span>
+              <span>感謝！</span>
+            </button>
+
+            <div class="fever-meter-wrapper">
+              <div class="fever-bar">
+                <div class="fever-fill" id="fever-fill"></div>
+              </div>
+              <div class="fever-label">連打で感謝フィーバーゲージ上昇！⚡</div>
+            </div>
+          </div>
+
+          <!-- 感謝のおみくじ -->
+          <div class="omikuji-box">
+            <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem;">🌸 今日の感謝神託（おみくじ）</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">今日あなたが心から感謝すべき幸運の導きを授かります。</p>
+
+            <div class="omikuji-display" id="omikuji-display">
+              <div class="omikuji-result-title" id="omikuji-title">🌸 感謝の筒を振ってください</div>
+              <div class="omikuji-result-text" id="omikuji-text">下のボタンを押して、今日の感謝神託を受け取りましょう。</div>
+            </div>
+
+            <button id="btn-draw-omikuji" class="btn-secondary" style="margin: 0 auto;">
+              <span>🎋</span> 神託おみくじを引く
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         信徒証ジェネレーター (Certificate Generator)
+         ========================================================================== -->
+    <section class="section" id="certificate">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Official Certification</span>
+          <h2 class="section-title">デジタル信徒証 発行所</h2>
+          <p class="section-subtitle">
+            あなたのお名前（ニックネーム可）を入れると、公式ロゴと聖女マスコットが刻印された<br>
+            世界にひとつだけの「ありがとう教 信徒証」を発行・画像ダウンロードできます。
+          </p>
+        </div>
+
+        <div class="certificate-section">
+          <div class="cert-form">
+            <input type="text" id="cert-name-input" class="cert-input" placeholder="お名前・ハンドルネームを入力..." maxlength="15">
+            <button id="btn-issue-cert" class="btn-primary">
+              <span>🪪</span> 信徒証を発行する
+            </button>
+            <button id="btn-download-cert" class="btn-secondary" style="display: none;">
+              <span>💾</span> 画像として保存 (PNG)
+            </button>
+          </div>
+
+          <div class="canvas-preview-wrapper">
+            <canvas id="cert-canvas"></canvas>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+            ※発行された信徒証は端末内で安全に生成されます。SNSでのシェアも自由です！
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         よくある質問 (FAQ)
+         ========================================================================== -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">FAQ & Community</span>
+          <h2 class="section-title">よくあるご質問・心得</h2>
+          <p class="section-subtitle">
+            ありがとう教についての疑問にお答えします。
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>入信にお金やお布施は必要ですか？</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              一切不要です。ありがとう教の唯一の入信条件は「心からありがとうと言葉にすること」です。会費、お布施、物品の購入などは一切ございません。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>他の宗教を信仰していても入れますか？</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              もちろん大歓迎です！「ありがとう」は普遍的な愛と感謝の言霊です。仏教、キリスト教、神道、イスラム教、あるいは無宗教の方でも、感謝を大切にするすべての人に開かれています。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>初代教皇はどのような方ですか？</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              西暦2024年11月02日16時頃、私立聖学院中学高等学校の講堂にて、溢れ出る感謝の衝動から「ありがとう」と叫び、本教の創世の契機を作られた偉大なる開祖です。その魂の叫びは今や世界中の信徒の心に宿っています。
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>日々の実践としては何をすればよいですか？</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              1日に1回以上、何気ない日常や自分自身、周囲の人、あるいは使っている道具に「ありがとう」と微笑みかけるだけで十分です。当サイトの「感謝カウンター」をポチポチ押すことも立派な修行です。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       フッター (Footer)
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo-row">
+            <img src="logo.jpg" alt="ありがとう教ロゴ" class="footer-logo" onerror="this.src='Gemini_Generated_Image_i8js5ui8js5ui8js.jpg'">
+            <span class="footer-title">ありがとう教 公式ウェブサイト</span>
+          </div>
+          <p class="footer-desc">
+            「すべてに、心からのありがとうを。」<br>
+            私立聖学院の講堂から始まった小さな感謝の灯火が、世界をあたたかく包み込みます。
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-links-title">聖なる道標</h4>
+          <ul class="footer-links">
+            <li><a href="#doctrine">教義と理念</a></li>
+            <li><a href="#history">起源と歴史</a></li>
+            <li><a href="#archive">聖なる公式映像</a></li>
+            <li><a href="#hymn">聖歌「ありがとう」演奏</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-links-title">信徒の広場</h4>
+          <ul class="footer-links">
+            <li><a href="#languages">世界のありがとう40言語</a></li>
+            <li><a href="#sanctuary">感謝カウンター・おみくじ</a></li>
+            <li><a href="#certificate">デジタル信徒証発行</a></li>
+            <li><a href="#faq">よくある質問</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 - 2026 ありがとう教 (Arigato Kyo). All Gratitude Reserved.</p>
+        <p style="margin-top: 6px; font-size: 0.78rem;">本サイトは「ありがとう」の温かい心を広めるための公式ウェブサイトです。今日も訪れてくれてありがとう！🌸</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- スクリプト -->
+  <script src="script.js"></script>
+</body>
+</html>
